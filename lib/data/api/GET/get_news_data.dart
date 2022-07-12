@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_app_development_test_solution_karan/data/api/api_constants.dart';
+import 'package:flutter_app_development_test_solution_karan/data/model/news_information.dart';
 
 class GetNewsData {
   final Dio dio;
   GetNewsData({required this.dio});
-  Future<Map> getTopicHeadline(String topic) async {
+  Future<List> getTopicHeadline(String topic) async {
+    late List<NewsInformation> newsArticles;
     try {
       var response = await dio.get(
         NewsAPI.newsHeadlineURL,
@@ -21,7 +23,11 @@ class GetNewsData {
           },
         ),
       );
-      return response.data;
+      var jsonArticles = response.data['articles'] as List;
+      newsArticles = jsonArticles
+          .map((article) => NewsInformation.fromJson(article))
+          .toList();
+      return newsArticles;
     } on DioError catch (e) {
       throw e.message;
     }

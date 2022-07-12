@@ -18,7 +18,9 @@ class _HomePageState extends State<HomePage> {
       ),
       body: const Center(child: Text('')),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          var result = GetNewsData(dio: Dio()).getTopicHeadline('WORLD');
+        },
       ),
     );
   }
