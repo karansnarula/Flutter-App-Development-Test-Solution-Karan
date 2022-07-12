@@ -5,7 +5,7 @@ import 'package:flutter_app_development_test_solution_karan/data/model/news_info
 class GetNewsData {
   final Dio dio;
   GetNewsData({required this.dio});
-  Future<List> getTopicHeadline(String topic) async {
+  Future<List<NewsInformation>> getTopicHeadline(String topic) async {
     late List<NewsInformation> newsArticles;
     try {
       var response = await dio.get(
