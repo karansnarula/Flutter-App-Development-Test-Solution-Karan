@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app_development_test_solution_karan/data/api/GET/get_news_data.dart';
 import 'package:flutter_app_development_test_solution_karan/data/model/news_information.dart';
@@ -31,6 +29,8 @@ class _HomePageState extends State<HomePage> {
           } else {
             var _newsArticleList = snapshot.data as List<NewsInformation>;
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

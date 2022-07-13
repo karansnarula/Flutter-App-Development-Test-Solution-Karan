@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_development_test_solution_karan/data/model/date_formatter.dart';
 import 'package:flutter_app_development_test_solution_karan/data/model/news_information.dart';
+import 'package:flutter_app_development_test_solution_karan/ui/screens/my_webview.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsInformation newsInformation;
@@ -7,17 +9,35 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: [
-          Text(newsInformation.title),
-          Row(
-            children: [
-              Text(newsInformation.publishDate),
-              const Text("Read more..."),
-            ],
-          )
-        ],
+    return SizedBox(
+      width: 300,
+      height: 350,
+      child: Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(newsInformation.title),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(DateFormatter.formatDate(newsInformation.publishDate)),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 15),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => MyWebView(
+                              title: newsInformation.source,
+                              selectedUrl: newsInformation.link,
+                            )));
+                  },
+                  child: const Text('Read more'),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
