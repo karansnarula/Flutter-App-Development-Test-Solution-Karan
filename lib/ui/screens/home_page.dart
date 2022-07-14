@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_development_test_solution_karan/data/api/GET/get_news_data.dart';
-import 'package:flutter_app_development_test_solution_karan/data/model/news_information.dart';
-import 'package:flutter_app_development_test_solution_karan/ui/widgets/news_cards.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_app_development_test_solution_karan/ui/screens/news_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,45 +9,48 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Map<int, String> topicsList = {
+    1: 'WORLD',
+    2: 'NATION',
+    3: 'BUSINESS',
+    4: 'TECHNOLOGY',
+    5: 'ENTERTAINMENT',
+    6: 'SCIENCE',
+    7: 'SPORTS',
+    8: 'HEALTH',
+  };
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('News App'),
-      ),
-      body: FutureBuilder(
-        future: _getArticles(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator.adaptive());
-          }
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else {
-            var _newsArticleList = snapshot.data as List<NewsInformation>;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _newsArticleList
-                        .map((article) => NewsCard(newsInformation: article))
-                        .toList(),
-                  ),
-                ),
-              ],
-            );
-          }
-        },
+    return DefaultTabController(
+      length: 8,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('News App'),
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: [
+              Tab(text: topicsList[1]),
+              Tab(text: topicsList[2]),
+              Tab(text: topicsList[3]),
+              Tab(text: topicsList[4]),
+              Tab(text: topicsList[5]),
+              Tab(text: topicsList[6]),
+              Tab(text: topicsList[7]),
+              Tab(text: topicsList[8]),
+            ],
+          ),
+        ),
+        body: TabBarView(children: [
+          NewsPage(topic: topicsList[1]!),
+          NewsPage(topic: topicsList[2]!),
+          NewsPage(topic: topicsList[3]!),
+          NewsPage(topic: topicsList[4]!),
+          NewsPage(topic: topicsList[5]!),
+          NewsPage(topic: topicsList[6]!),
+          NewsPage(topic: topicsList[7]!),
+          NewsPage(topic: topicsList[8]!),
+        ]),
       ),
     );
-  }
-
-  Future<List> _getArticles() async {
-    var data = Provider.of<GetNewsData>(context, listen: false);
-    var newsArticles = await data.getTopicHeadline('WORLD');
-    return newsArticles;
   }
 }
