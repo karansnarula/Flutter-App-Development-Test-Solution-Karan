@@ -29,7 +29,13 @@ class GetNewsData {
           .toList();
       return newsArticles;
     } on DioError catch (e) {
-      throw e.message;
+      if (e.type == DioErrorType.connectTimeout) {
+        throw Exception("Connection Timeout Exception");
+      } else if (e.type == DioErrorType.response) {
+        throw Exception("Unknow error, please try again later");
+      } else {
+        throw e.message;
+      }
     }
   }
 }

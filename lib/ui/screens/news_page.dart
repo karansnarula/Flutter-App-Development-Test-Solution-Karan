@@ -18,7 +18,7 @@ class NewsPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
           if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
+            return Center(child: Text(snapshot.error.toString()));
           } else {
             var _newsArticleList = snapshot.data as List<NewsInformation>;
             return Column(

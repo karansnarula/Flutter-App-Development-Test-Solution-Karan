@@ -9,9 +9,10 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SizedBox(
-      width: 300,
-      height: 350,
+      width: size.width * 0.7, //300,
+      height: size.height * 0.65, //350,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
