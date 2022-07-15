@@ -20,6 +20,7 @@ class MyWebView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
+          centerTitle: true,
         ),
         body: WebView(
           initialUrl: selectedUrl,

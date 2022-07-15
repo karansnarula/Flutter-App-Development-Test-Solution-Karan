@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_development_test_solution_karan/data/model/date_formatter.dart';
 import 'package:flutter_app_development_test_solution_karan/data/model/news_information.dart';
 import 'package:flutter_app_development_test_solution_karan/ui/screens/my_webview.dart';
+import 'package:flutter_app_development_test_solution_karan/ui/widgets/custom_icon_button.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsInformation newsInformation;
@@ -17,13 +18,10 @@ class NewsCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.,
             children: [
               Align(
-                child: IconButton(
-                  icon: const Icon(Icons.bookmark),
-                  onPressed: () {},
-                ),
+                child: CustomIconButton(
+                    icon: Icons.bookmark, newsInformation: newsInformation),
                 alignment: Alignment.topRight,
               ),
               Text(
