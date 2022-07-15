@@ -11,33 +11,58 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SizedBox(
-      width: size.width * 0.7, //300,
-      height: size.height * 0.65, //350,
+      width: size.width * 0.7,
+      height: size.height * 0.5,
       child: Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(newsInformation.title),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(DateFormatter.formatDate(newsInformation.publishDate)),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 15),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => MyWebView(
-                              title: newsInformation.source,
-                              selectedUrl: newsInformation.link,
-                            )));
-                  },
-                  child: const Text('Read more'),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.,
+            children: [
+              Align(
+                child: IconButton(
+                  icon: const Icon(Icons.bookmark),
+                  onPressed: () {},
                 ),
-              ],
-            )
-          ],
+                alignment: Alignment.topRight,
+              ),
+              Text(
+                newsInformation.title,
+                style: const TextStyle(
+                  fontFamily: 'Times',
+                  fontSize: 18,
+                ),
+              ),
+              const Spacer(),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      DateFormatter.formatDate(newsInformation.publishDate),
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 10,
+                      ),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 15),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) => MyWebView(
+                                  title: newsInformation.source,
+                                  selectedUrl: newsInformation.link,
+                                )));
+                      },
+                      child: const Text('Read more'),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -24,6 +24,38 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 8,
       child: Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Center(
+                    child: Text(
+                  'The best news app',
+                  style: TextStyle(color: Colors.white),
+                )),
+              ),
+              ListTile(
+                title: const Text('News'),
+                onTap: () {
+                  const HomePage();
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text('Saved'),
+                onTap: () {
+                  //
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
           title: const Text('News App'),
           bottom: TabBar(
