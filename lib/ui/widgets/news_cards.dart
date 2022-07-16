@@ -14,54 +14,50 @@ class NewsCard extends StatelessWidget {
     return SizedBox(
       width: size.width * 0.7,
       height: size.height * 0.5,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Align(
-                child: CustomIconButton(
-                    icon: Icons.bookmark, newsInformation: newsInformation),
-                alignment: Alignment.topRight,
-              ),
-              Text(
-                newsInformation.title,
-                style: const TextStyle(
-                  fontFamily: 'Times',
-                  fontSize: 18,
+      child: InkWell(
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Align(
+                  child: CustomIconButton(
+                      icon: Icons.bookmark, newsInformation: newsInformation),
+                  alignment: Alignment.topRight,
                 ),
-              ),
-              const Spacer(),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      DateFormatter.formatDate(newsInformation.publishDate),
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 10,
-                      ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 15),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => MyWebView(
-                                  title: newsInformation.source,
-                                  selectedUrl: newsInformation.link,
-                                )));
-                      },
-                      child: const Text('Read more'),
-                    ),
-                  ],
+                Text(
+                  newsInformation.title,
+                  style: const TextStyle(
+                    fontFamily: 'Times',
+                    fontSize: 18,
+                  ),
                 ),
-              )
-            ],
+                const Spacer(),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        DateFormatter.formatDate(newsInformation.publishDate),
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => MyWebView(
+                    title: newsInformation.source,
+                    selectedUrl: newsInformation.link,
+                  )));
+        },
       ),
     );
   }

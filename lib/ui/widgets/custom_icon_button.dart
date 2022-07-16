@@ -14,7 +14,7 @@ class CustomIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(icon),
-      onPressed: () async {
+      onPressed: () {
         SharedPreferences preferences =
             Provider.of<SharedPreferences>(context, listen: false);
         if (icon == Icons.bookmark) {
@@ -51,6 +51,7 @@ class CustomIconButton extends StatelessWidget {
     SnackBar snackBar = SnackBar(
       content: Text(message),
       backgroundColor: color,
+      duration: const Duration(seconds: 2),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
