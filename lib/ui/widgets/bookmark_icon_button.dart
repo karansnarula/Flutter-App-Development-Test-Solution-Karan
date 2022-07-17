@@ -3,44 +3,35 @@ import 'package:flutter_app_development_test_solution_karan/data/model/news_info
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CustomIconButton extends StatelessWidget {
-  final IconData icon;
+class BookmarkIconButton extends StatelessWidget {
   final NewsInformation newsInformation;
-  const CustomIconButton(
-      {Key? key, required this.icon, required this.newsInformation})
+  const BookmarkIconButton({Key? key, required this.newsInformation})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(icon),
+      icon: const Icon(Icons.bookmark),
       onPressed: () {
         SharedPreferences preferences =
             Provider.of<SharedPreferences>(context, listen: false);
-        if (icon == Icons.bookmark) {
-          if (preferences.containsKey(newsInformation.title)) {
-            showSnackBar(
-              context,
-              "You have already saved this news",
-              Colors.blue,
-            );
-          } else {
-            preferences.setStringList(newsInformation.title, [
-              newsInformation.publishDate,
-              newsInformation.link,
-            ]);
-            showSnackBar(
-              context,
-              "You successfully saved this news",
-              Colors.green,
-            );
-          }
-        } else {
-          preferences.remove(newsInformation.title);
+        if (preferences.containsKey(newsInformation.title)) {
           showSnackBar(
             context,
-            "You have successfully removed this news",
-            Colors.red,
+            "You have already saved this news",
+            Colors.blue,
+          );
+        } else {
+          preferences.setStringList(newsInformation.title, [
+            //List order is hard-coded eg. [publishDate : index = 0 , source : index =  1 , link : index = 2]
+            newsInformation.publishDate,
+            newsInformation.source,
+            newsInformation.link,
+          ]);
+          showSnackBar(
+            context,
+            "You successfully saved this news",
+            Colors.green,
           );
         }
       },

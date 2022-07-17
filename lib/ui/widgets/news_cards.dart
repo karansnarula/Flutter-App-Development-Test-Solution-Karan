@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_development_test_solution_karan/data/model/date_formatter.dart';
 import 'package:flutter_app_development_test_solution_karan/data/model/news_information.dart';
 import 'package:flutter_app_development_test_solution_karan/ui/screens/my_webview.dart';
-import 'package:flutter_app_development_test_solution_karan/ui/widgets/custom_icon_button.dart';
+import 'package:flutter_app_development_test_solution_karan/ui/widgets/bookmark_icon_button.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsInformation newsInformation;
@@ -21,8 +21,7 @@ class NewsCard extends StatelessWidget {
             child: Column(
               children: [
                 Align(
-                  child: CustomIconButton(
-                      icon: Icons.bookmark, newsInformation: newsInformation),
+                  child: BookmarkIconButton(newsInformation: newsInformation),
                   alignment: Alignment.topRight,
                 ),
                 Text(
